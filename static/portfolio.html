@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saikat Santra - AI/ML Engineer & Portfolio</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Saikat Santra - Master's student at IIT Kharagpur specializing in Generative AI, Machine Learning, and RAG systems. Applied AI Scientist with expertise in multi-agent workflows and data-driven solutions.">
+    <meta name="keywords" content="Saikat Santra, AI Engineer, Machine Learning, Generative AI, RAG, IIT Kharagpur, Python, LangChain, Crew AI, Data Science">
+    <meta name="author" content="Saikat Santra">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Tags for Social Sharing -->
+    <meta property="og:title" content="Saikat Santra - AI/ML Engineer & Portfolio">
+    <meta property="og:description" content="Master's student at IIT Kharagpur specializing in Generative AI, Machine Learning, and RAG systems.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://saikatsantra.com">
+    <meta property="og:image" content="https://placehold.co/1200x630/0a192f/64ffda?text=Saikat+Santra">
+    <meta property="og:site_name" content="Saikat Santra Portfolio">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Saikat Santra - AI/ML Engineer & Portfolio">
+    <meta name="twitter:description" content="Master's student at IIT Kharagpur specializing in Generative AI, Machine Learning, and RAG systems.">
+    <meta name="twitter:image" content="https://placehold.co/1200x630/0a192f/64ffda?text=Saikat+Santra">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>S</text></svg>">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a192f;
+            color: #ccd6f6;
+        }
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #64ffda;
+        }
+        
+        /* Enhanced Logo Styling */
+        .nav-logo {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .nav-logo .text-cyan-400 {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .glass-card {
+            background: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            border-color: rgba(100, 255, 218, 0.3);
+        }
+        .skill-tag {
+             background-color: rgba(100, 255, 218, 0.1);
+             color: #64ffda;
+             transition: all 0.3s ease;
+        }
+        .skill-tag:hover {
+            background-color: rgba(100, 255, 218, 0.2);
+            transform: scale(1.05);
+        }
+        .page {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        #chat-popup {
+            display: none;
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        .btn-primary {
+            background-color: transparent;
+            border: 1px solid #64ffda;
+            color: #64ffda;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+        }
+         .btn-secondary {
+            background-color: transparent;
+            border: 1px solid #8892b0;
+            color: #8892b0;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: rgba(136, 146, 176, 0.1);
+        }
+        .loader {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Light Mode Styles */
+        [data-theme="light"] {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --accent: #0891b2;
+            --border: #e2e8f0;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --header-bg: rgba(248, 250, 252, 0.95);
+        }
+        
+        [data-theme="light"] body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        
+        [data-theme="light"] header {
+            background-color: var(--header-bg) !important;
+            backdrop-filter: blur(10px);
+        }
+        
+        [data-theme="light"] .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        [data-theme="light"] .glass-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: var(--accent);
+        }
+        
+        [data-theme="light"] .skill-tag {
+            background-color: rgba(8, 145, 178, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(8, 145, 178, 0.2);
+        }
+        
+        [data-theme="light"] .skill-tag:hover {
+            background-color: rgba(8, 145, 178, 0.15);
+            border-color: var(--accent);
+        }
+        
+        [data-theme="light"] .btn-primary {
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            background-color: transparent;
+        }
+        
+        [data-theme="light"] .btn-primary:hover {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        [data-theme="light"] .btn-secondary {
+            border: 2px solid var(--text-secondary);
+            color: var(--text-secondary);
+            background-color: transparent;
+        }
+        
+        [data-theme="light"] .btn-secondary:hover {
+            background-color: var(--text-secondary);
+            color: white;
+        }
+        
+        [data-theme="light"] input,
+        [data-theme="light"] textarea {
+            background-color: var(--bg-secondary) !important;
+            color: var(--text-primary) !important;
+            border: 2px solid var(--border) !important;
+        }
+        
+        [data-theme="light"] input:focus,
+        [data-theme="light"] textarea:focus {
+            border-color: var(--accent) !important;
+            box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.1);
+        }
+        
+        [data-theme="light"] .nav-link {
+            color: var(--text-secondary);
+        }
+        
+        [data-theme="light"] .nav-link:hover,
+        [data-theme="light"] .nav-link.active {
+            color: var(--accent);
+        }
+        
+        [data-theme="light"] h1,
+        [data-theme="light"] h2,
+        [data-theme="light"] h3 {
+            color: var(--text-primary);
+        }
+        
+        [data-theme="light"] .text-slate-100 {
+            color: var(--text-primary) !important;
+        }
+        
+        [data-theme="light"] .text-slate-300 {
+            color: var(--text-secondary) !important;
+        }
+        
+        [data-theme="light"] .text-slate-400 {
+            color: #64748b !important;
+        }
+        
+        [data-theme="light"] .text-cyan-400 {
+            color: var(--accent) !important;
+        }
+        
+        /* Light theme logo styling */
+        [data-theme="light"] .nav-logo .text-white {
+            color: var(--text-primary) !important;
+        }
+        
+        [data-theme="light"] .nav-logo .text-cyan-400 {
+            color: var(--accent) !important;
+        }
+        
+        [data-theme="light"] .nav-logo:hover {
+            transform: scale(1.05);
+        }
+        
+        [data-theme="light"] #chat-popup {
+            background-color: var(--bg-secondary) !important;
+            border: 1px solid var(--border);
+        }
+        
+        [data-theme="light"] #chat-box {
+            background-color: var(--bg-primary);
+        }
+        
+        [data-theme="light"] #chat-input {
+            background-color: var(--bg-secondary) !important;
+            color: var(--text-primary) !important;
+            border: 1px solid var(--border) !important;
+        }
+    </style>
+</head>
+<body class="text-gray-300">
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Header & Navigation -->
+    <header class="bg-navy-dark/80 backdrop-blur-sm shadow-lg sticky top-0 z-50" style="background-color: rgba(10, 25, 47, 0.8);">
+        <nav class="container mx-auto px-6 py-5 flex justify-between items-center">
+            <a href="#home" class="nav-logo group relative" aria-label="Home">
+                <div class="text-3xl font-extrabold text-white tracking-wider relative">
+                    <span class="relative z-10">S</span>
+                    <span class="text-cyan-400 relative z-10">.</span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-transparent rounded-lg transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                </div>
+                <div class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-transparent group-hover:w-full transition-all duration-300"></div>
+            </a>
+            <nav class="hidden md:flex items-center space-x-6" role="navigation" aria-label="Main navigation">
+                <a href="#experience" class="nav-link text-slate-300 hover:text-cyan-400" aria-label="Experience section">Experience</a>
+                <a href="#projects" class="nav-link text-slate-300 hover:text-cyan-400" aria-label="Projects section">Projects</a>
+                <a href="#blogs" class="nav-link text-slate-300 hover:text-cyan-400" aria-label="Blogs section">Blogs</a>
+                <a href="#certifications" class="nav-link text-slate-300 hover:text-cyan-400" aria-label="Certifications section">Certifications</a>
+                <a href="#contact" class="nav-link text-slate-300 hover:text-cyan-400" aria-label="Contact section">Contact</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="text-slate-300 hover:text-cyan-400 focus:outline-none transition-colors" aria-label="Toggle dark/light mode">
+                    <i class="fas fa-moon text-xl"></i>
+                </button>
+                <button id="mobile-menu-button" class="md:hidden text-slate-300 focus:outline-none" aria-label="Toggle mobile menu" aria-expanded="false">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-navy-dark px-6 pb-4">
+            <a href="#home" class="block py-2 text-slate-300 nav-link">Home</a>
+            <a href="#about" class="block py-2 text-slate-300 nav-link">About</a>
+            <a href="#experience" class="block py-2 text-slate-300 nav-link">Experience</a>
+            <a href="#projects" class="block py-2 text-slate-300 nav-link">Projects</a>
+            <a href="#blogs" class="block py-2 text-slate-300 nav-link">Blogs</a>
+            <a href="#certifications" class="block py-2 text-slate-300 nav-link">Certifications</a>
+            <a href="#contact" class="block py-2 text-slate-300 nav-link">Contact</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12 relative z-10">
+
+        <!-- Home Page -->
+        <section id="home" class="page min-h-screen flex flex-col justify-center">
+            <div class="flex flex-col lg:flex-row items-center lg:items-start gap-12 max-w-7xl mx-auto">
+                <!-- Left Content -->
+                <div class="lg:w-2/3">
+                    <p class="text-cyan-400 text-lg mb-4">Hi, my name is</p>
+                    <h1 class="text-5xl md:text-7xl font-bold text-slate-100 mb-4">Saikat Santra.</h1>
+                    <h2 class="text-4xl md:text-6xl font-bold text-slate-400 mb-8">I build intelligent systems with AI.</h2>
+                    <p class="text-lg text-slate-400 max-w-xl mb-12">I'm a graduate student at IIT Kharagpur with a passion for Generative AI and Machine Learning, focused on creating scalable, data-driven solutions.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#projects" class="nav-link-button btn-primary font-semibold px-6 py-3 rounded-md">View My Work</a>
+                        <a href="./my_cv.pdf" download="Saikat_Santra_Resume.pdf" class="btn-secondary font-semibold px-6 py-3 rounded-md hover:bg-slate-700 transition-colors">
+                            <i class="fas fa-download mr-2"></i>Download Resume
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Right Content - IIT KGP Badge and Profile Photo -->
+                <div class="lg:w-1/3 flex flex-col items-center lg:items-start gap-8 pt-8">
+                    <!-- IIT KGP Badge -->
+                    <div class="inline-flex items-center bg-slate-800/50 backdrop-blur-sm border border-slate-600 rounded-lg px-6 py-4 shadow-lg hover:border-cyan-400 transition-colors">
+                        <div class="w-12 h-12 mr-4">
+                            <img src="https://logowik.com/content/uploads/images/iit-indian-institute-of-technology-kharagpur4613.jpg" alt="IIT Kharagpur Logo" class="w-full h-full object-cover rounded-full">
+                        </div>
+                        <div class="text-left">
+                            <div class="text-slate-200 font-semibold text-lg">IIT Kharagpur</div>
+                            <div class="text-slate-400 text-sm">Master's Student</div>
+                            <div class="text-cyan-400 text-xs mt-1">Agricultural Systems & Management</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Profile Photo -->
+                    <img src="./saikat-profile.png" alt="Saikat Santra" class="rounded-full shadow-2xl w-80 h-80 border-4 border-cyan-400 object-cover">
+                </div>
+            </div>
+
+            <!-- About Section on Home Page -->
+            <div class="mt-24">
+                <h2 class="text-3xl font-bold text-center mb-12 text-slate-100">About Me</h2>
+                <div class="max-w-4xl mx-auto">
+                    <div class="glass-card p-8 rounded-lg">
+                        <p class="text-lg text-slate-300 leading-relaxed mb-4">Hello! I'm a Master's student at IIT Kharagpur, specializing in Agricultural Systems and Management. My academic and professional journey is driven by a deep fascination with applying AI to solve complex, real-world problems.</p>
+                        <p class="text-lg text-slate-300 leading-relaxed mb-4">From developing multi-agent AI systems and RAG-based report generators to building predictive models for real estate, my work centers on creating practical, high-impact solutions. I thrive on engineering new features, optimizing models, and building autonomous systems that are both powerful and user-friendly.</p>
+                        <p class="text-lg text-slate-300 leading-relaxed">I am constantly exploring the frontiers of Generative AI and am eager to contribute to cutting-edge advancements in the field.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills Section on Home Page -->
+            <div id="skills" class="mt-24">
+                <h2 class="text-3xl font-bold text-center mb-12 text-slate-100">Technical Skills</h2>
+                <div id="skills-container" class="max-w-4xl mx-auto space-y-8">
+                    <!-- Skills will be injected here -->
+                </div>
+            </div>
+            
+                          <!-- Education Section on Home Page -->
+             <div id="education" class="mt-24">
+                  <h2 class="text-3xl font-bold text-center mb-12 text-slate-100">Education</h2>
+                  <div id="education-container" class="max-w-2xl mx-auto space-y-8">
+                     <!-- Education will be injected here -->
+                  </div>
+             </div>
+             
+             <!-- Currently Learning Section -->
+             <div id="learning" class="mt-24">
+                 <h2 class="text-3xl font-bold text-center mb-12 text-slate-100">Currently Learning</h2>
+                 <div class="max-w-4xl mx-auto">
+                     <div class="glass-card p-8 rounded-lg">
+                         <div class="grid md:grid-cols-2 gap-6">
+                             <div class="text-center">
+                                 <i class="fas fa-brain text-4xl text-cyan-400 mb-4"></i>
+                                 <h3 class="text-xl font-bold text-cyan-400 mb-2">Advanced LLM Architectures</h3>
+                                 <p class="text-slate-400">Exploring transformer variants, attention mechanisms, and model optimization techniques</p>
+                             </div>
+                             <div class="text-center">
+                                 <i class="fas fa-network-wired text-4xl text-cyan-400 mb-4"></i>
+                                 <h3 class="text-xl font-bold text-cyan-400 mb-2">Multi-Agent Orchestration</h3>
+                                 <p class="text-slate-400">Studying advanced agent coordination, task decomposition, and workflow optimization</p>
+                             </div>
+                             <div class="text-center">
+                                 <i class="fas fa-chart-line text-4xl text-cyan-400 mb-4"></i>
+                                 <h3 class="text-xl font-bold text-cyan-400 mb-2">MLOps & Deployment</h3>
+                                 <p class="text-slate-400">Learning model deployment, monitoring, and production ML pipeline management</p>
+                             </div>
+                             <div class="text-center">
+                                 <i class="fas fa-cogs text-4xl text-cyan-400 mb-4"></i>
+                                 <h3 class="text-xl font-bold text-cyan-400 mb-2">MCP - Model Context Protocol</h3>
+                                 <p class="text-slate-400">Studying model context protocols, AI model interoperability, and standardized communication frameworks</p>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+        </section>
+
+
+        
+        <!-- Experience Page -->
+        <section id="experience" class="page py-20 hidden">
+            <h2 class="text-4xl font-bold text-center mb-12 text-slate-100">Internship Experience</h2>
+            <div id="experience-container" class="max-w-3xl mx-auto space-y-8">
+                 <!-- Experience cards will be injected here -->
+            </div>
+        </section>
+
+        <!-- Projects Page -->
+        <section id="projects" class="page py-20 hidden">
+            <h2 class="text-4xl font-bold text-center mb-12 text-slate-100">My Projects</h2>
+            <div id="project-container" class="grid md:grid-cols-1 lg:grid-cols-1 gap-8 max-w-4xl mx-auto">
+                <!-- Project cards will be injected here -->
+            </div>
+        </section>
+
+        <!-- Blogs Page -->
+        <section id="blogs" class="page py-20 hidden">
+            <h2 class="text-4xl font-bold text-center mb-12 text-slate-100">My Writings</h2>
+            <div id="blog-container" class="max-w-3xl mx-auto space-y-8">
+                 <!-- Blog cards will be injected here -->
+            </div>
+        </section>
+
+        <!-- Certifications Page -->
+        <section id="certifications" class="page py-20 hidden">
+            <h2 class="text-4xl font-bold text-center mb-12 text-slate-100">Licenses & Certifications</h2>
+            <div id="certifications-container" class="max-w-3xl mx-auto space-y-8">
+                 <!-- Certifications cards will be injected here -->
+            </div>
+        </section>
+
+                 <!-- Contact Page -->
+         <section id="contact" class="page py-20 hidden">
+             <h2 class="text-4xl font-bold text-center mb-12 text-slate-100">Get In Touch</h2>
+             <div class="max-w-2xl mx-auto">
+                 <p class="text-lg text-slate-400 mb-8 text-center">I'm currently seeking new opportunities and my inbox is always open. Whether you have a question or just want to say hi, I'll get back to you!</p>
+                 
+                 <!-- Simple Email Contact -->
+                 <div class="glass-card p-8 rounded-lg mb-8 text-center">
+                     <h3 class="text-2xl font-bold text-slate-100 mb-4">Let's Connect!</h3>
+                     <p class="text-slate-400 mb-6">I'm always open to discussing new opportunities, interesting projects, or just saying hello!</p>
+                     <a href="mailto:saikatsantra6396@gmail.com" class="btn-primary font-semibold px-8 py-3 rounded-lg hover:bg-cyan-400 hover:text-navy-dark transition-colors inline-flex items-center">
+                         <i class="fas fa-envelope mr-2"></i>Say Hi via Email
+                     </a>
+                 </div>
+                 
+                 <!-- Social Links -->
+                 <div class="flex justify-center space-x-6">
+                     <a href="https://www.linkedin.com/in/saikat-santra-ai/" target="_blank" class="text-slate-400 hover:text-cyan-400 transition-colors" aria-label="LinkedIn Profile">
+                         <i class="fab fa-linkedin text-3xl"></i>
+                     </a>
+                     <a href="https://github.com/saikat37" target="_blank" class="text-slate-400 hover:text-cyan-400 transition-colors" aria-label="GitHub Profile">
+                         <i class="fab fa-github text-3xl"></i>
+                     </a>
+                 </div>
+             </div>
+         </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-6 mt-12 relative z-10">
+        <p class="text-slate-400 text-sm">Designed & Built by Saikat Santra</p>
+    </footer>
+
+    <!-- Chatbot Components -->
+    <button id="chat-toggle" class="fixed bottom-8 right-8 bg-cyan-400 text-navy-dark w-16 h-16 rounded-full shadow-lg flex items-center justify-center hover:bg-cyan-300 transition-colors focus:outline-none z-50">
+        <i class="fas fa-robot text-2xl"></i>
+    </button>
+    <div id="chat-popup" class="fixed bottom-28 right-8 w-full max-w-sm rounded-lg shadow-2xl transform scale-95 opacity-0 z-50" style="background-color: #112240;">
+        <div class="flex justify-between items-center p-4 bg-cyan-400 text-navy-dark rounded-t-lg">
+            <h3 class="font-bold text-lg">Chat with my AI Assistant</h3>
+            <button id="close-chat" class="text-navy-dark hover:text-gray-700 focus:outline-none"><i class="fas fa-times text-xl"></i></button>
+        </div>
+        <div id="chat-box" class="p-4 h-80 overflow-y-auto">
+             <div class="flex justify-start mb-4"><div class="p-3 rounded-lg max-w-xs" style="background-color: #233554; color: #ccd6f6;"><p>Hello! Ask me anything about my skills, projects, or experience. I'm powered by Google's Gemini model.</p></div></div>
+        </div>
+        <div class="p-4 border-t border-slate-700 flex">
+            <input type="text" id="chat-input" placeholder="Type your question..." class="w-full px-4 py-2 border-0 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-cyan-400" style="background-color: #233554; color: #ccd6f6;">
+            <button id="send-chat" class="bg-cyan-400 text-navy-dark px-4 py-2 rounded-r-lg hover:bg-cyan-300 flex items-center justify-center w-20">Send</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Data from CV ---
+            const education = [
+                { degree: "M.Tech in Agricultural Systems and Management", school: "Indian Institute of Technology Kharagpur", year: "2026", gpa: "9.40/10.0" },
+                { degree: "B.Tech in Agricultural Engineering", school: "Aditya Engineering College", year: "2023", gpa: "8.48/10.0" }
+            ];
+            const experiences = [
+                { 
+                    role: "Applied AI Scientist Intern", 
+                    company: "Agent Mira", 
+                    duration: "May 2025 - July 2025", 
+                    points: [
+                        "Developed a dynamic, multi-agent AI Property Recommendation System using CrewAl with task orchestration based on real-time user intent.",
+                        "Integrated CosmosDB for real-time property data fetching and FastAPI for backend APIs, supporting an interactive chat interface.",
+                        "Built a RAG-based Property Condition Report Generator combining internet search, property metadata, and AI summarization for generating comprehensive property intelligence.",
+                        "Designed dynamic analytics dashboards with client-level insights using modern data visualization frameworks."
+                    ] 
+                }
+            ];
+            const projects = [
+                { 
+                    title: "PageDrafter - AI Website Generation Agent", 
+                    tags: ["LangChain", "LLMs", "Agentic AI", "Gemini API"], 
+                    description: "Developed an autonomous agent that generates complete, modular, and responsive websites from natural language prompts using LLMs. Enabled non-coders to build websites dynamically through a conversational UI."
+                },
+                { 
+                    title: "Real Estate Data Analysis, Prediction, and Recommendation System", 
+                    tags: ["Python", "ML", "Streamlit", "XGBoost", "EDA"], 
+                    description: "Scraped and cleaned real estate data from 99acres, engineered advanced features, and trained an XGBoost Regressor model to 90% accuracy. Deployed as a Streamlit web app with maps, a price predictor, and a recommendation engine.",
+                    demo: 'realestate',
+                    repoLink: 'https://github.com/saikat37/HomeScout-ML'
+                },
+                { 
+                    title: "Application of Generative AI for Sensor-Based Soil Analysis", 
+                    tags: ["GANs", "ML", "Carbon Trading", "ESG"], 
+                    description: "Developing a GAN model to generate synthetic soil spectra data for data-scarce regions. Building a platform for soil-based carbon credit verification and trading based on regenerative agriculture practices."
+                }
+            ];
+            const skills = {
+                "Programming Languages": ["Python", "SQL"],
+                "Technical Skills": ["Natural Language Processing (NLP)", "Generative AI", "Agentic AI", "Machine Learning", "Deep Learning", "RAG", "Multi-Agent Workflow", "LLMs", "Vector DB", "Feature Engineering", "EDA"],
+                "Libraries & Frameworks": ["Scikit-learn", "Pandas", "NumPy", "Hugging Face", "LangChain", "Crew AI", "Matplotlib", "Seaborn"],
+                "Tools & Platforms": ["MySQL", "CosmosDB", "Microsoft Azure", "Git", "GitHub", "Jupyter Notebook"]
+            };
+            const blogs = [
+                { 
+                    title: "MCP: The Universal Adapter — Unlocking AI’s True Potential", 
+                    summary: "An exploration of how Model-Centric Prompting (MCP) can act as a universal adapter, enhancing the capabilities and interoperability of AI models.", 
+                    link: "https://medium.com/@saikatsantra6396/mcp-the-universal-adapter-unlocking-ais-true-potential-55381ed06b0a" 
+                }
+            ];
+            const certifications = [
+                { name: "Agentic AI with LangChain and LangGraph", provider: "IBM", link: "https://www.coursera.org/account/accomplishments/verify/M6Q502L2T3BG" },
+                { name: "Introduction to Microsoft Azure Cloud Services", provider: "Microsoft", link: "https://www.coursera.org/account/accomplishments/verify/9NYCHG0AHWFI" },
+                { name: "Generative AI Language Modeling with Transformers", provider: "IBM", link: "https://www.coursera.org/account/accomplishments/verify/XFUJOD7P2RO9" },
+                { name: "Complete Generative AI Course With Langchain and Huggingface", provider: "Udemy", link: "https://www.udemy.com/certificate/UC-d4dff5a4-10fd-4604-a2d2-cb6884e1b7c2/" },
+                { name: "The Data Science Course: Complete Data Science Bootcamp 2025", provider: "Udemy", link: "https://www.udemy.com/certificate/UC-b0ac2c29-cf7f-4ae9-8a2e-e9c0d7e762f8/" },
+                { name: "MTA: Introduction to Programming Using Python", provider: "Microsoft", link: "https://www.credly.com/badges/be023895-b782-4cc8-8ab9-d93901a4500d" }
+            ];
+            const contactInfo = {
+                email: "saikatsantra6396@gmail.com",
+                phone: "+91 7076763129",
+                linkedin: "https://www.linkedin.com/in/saikat-santra-ai/",
+                github: "https://github.com/saikat37"
+            };
+            const resumeURL = 'my_cv.pdf'; 
+
+            // --- Dynamic Content Injection ---
+            const injectContent = (containerId, data, renderer) => {
+                const container = document.getElementById(containerId);
+                if (container) {
+                    container.innerHTML = '';
+                    data.forEach(item => container.appendChild(renderer(item)));
+                }
+            };
+            
+            injectContent('education-container', education, edu => {
+                const card = document.createElement('div');
+                card.className = 'glass-card p-6 rounded-lg';
+                card.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-xl font-bold text-cyan-400">${edu.school}</h3>
+                            <p class="text-slate-300">${edu.degree}</p>
+                        </div>
+                        <p class="text-sm text-slate-400 font-mono">${edu.year}</p>
+                    </div>
+                    <p class="text-sm text-slate-400 mt-2">CGPA: ${edu.gpa}</p>`;
+                return card;
+            });
+            
+            const skillsContainer = document.getElementById('skills-container');
+            if(skillsContainer){
+                skillsContainer.innerHTML = '';
+                for(const category in skills){
+                    const categoryDiv = document.createElement('div');
+                    categoryDiv.innerHTML = `<h3 class="text-xl font-bold text-slate-300 mb-4">${category}</h3>
+                                             <div class="flex flex-wrap justify-center gap-3">
+                                                ${skills[category].map(skill => `<span class="skill-tag font-medium px-4 py-2 rounded-lg shadow-sm cursor-default">${skill}</span>`).join('')}
+                                             </div>`;
+                    skillsContainer.appendChild(categoryDiv);
+                }
+            }
+
+            injectContent('experience-container', experiences, e => {
+                const card = document.createElement('div');
+                card.className = 'glass-card p-6 rounded-lg';
+                card.innerHTML = `
+                    <h3 class="text-xl font-bold text-cyan-400">${e.role} @ ${e.company}</h3>
+                    <p class="text-sm text-slate-400 mb-4 font-mono">${e.duration}</p>
+                    <ul class="list-disc list-inside space-y-2 text-slate-300">
+                        ${e.points.map(point => `<li>${point}</li>`).join('')}
+                    </ul>`;
+                return card;
+            });
+
+            injectContent('project-container', projects, p => {
+                const card = document.createElement('div');
+                card.className = 'glass-card rounded-lg overflow-hidden flex flex-col p-6';
+                let demoHtml = '';
+                if (p.demo === 'realestate') {
+                     demoHtml = `
+                        <div class="mt-4 border-t border-slate-700 pt-4">
+                            <h4 class="font-bold text-cyan-400 mb-2">Links</h4>
+                            <div class="flex gap-4 mt-2">
+                                <a href="${p.repoLink}" target="_blank" class="btn-secondary flex-1 text-center py-2 rounded-md">View on GitHub</a>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                card.innerHTML = `
+                    <div class="flex-grow">
+                        <h3 class="text-xl font-bold mb-2 text-cyan-400">${p.title}</h3>
+                        <p class="text-slate-400 mb-4 text-sm">${p.description}</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mt-auto pt-4">
+                        ${p.tags.map(tag => `<span class="skill-tag text-xs font-medium px-2.5 py-1 rounded-full">${tag}</span>`).join('')}
+                    </div>
+                    ${demoHtml}
+                `;
+                return card;
+            });
+
+            injectContent('blog-container', blogs, b => {
+                const card = document.createElement('div');
+                card.className = 'glass-card p-6 rounded-lg';
+                card.innerHTML = `
+                    <h3 class="text-xl font-bold text-cyan-400">${b.title}</h3>
+                    <p class="text-slate-300 mb-3">${b.summary}</p>
+                    <a href="${b.link}" target="_blank" class="font-semibold text-cyan-400 hover:text-white transition-colors">Read on Medium &rarr;</a>`;
+                return card;
+            });
+
+            injectContent('certifications-container', certifications, c => {
+                const card = document.createElement('div');
+                card.className = 'glass-card p-6 rounded-lg flex justify-between items-center';
+                card.innerHTML = `
+                    <div>
+                        <h3 class="text-xl font-bold text-cyan-400">${c.name}</h3>
+                        <p class="text-slate-300">${c.provider}</p>
+                    </div>
+                    <a href="${c.link}" target="_blank" class="btn-secondary font-semibold px-4 py-2 rounded-md">Show Credential</a>`;
+                return card;
+            });
+            
+            
+
+
+            // --- Page Navigation Logic ---
+            const navLinks = document.querySelectorAll('.nav-link, .nav-logo, .nav-link-button');
+            const pages = document.querySelectorAll('.page');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            function showPage(pageId) {
+                pages.forEach(page => page.classList.toggle('hidden', page.id !== pageId));
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    const linkHref = link.getAttribute('href');
+                    link.classList.toggle('active', linkHref === `#${pageId}`);
+                });
+                mobileMenu.classList.add('hidden');
+                window.scrollTo(0, 0);
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const href = link.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        e.preventDefault();
+                        const targetId = href.substring(1);
+                        showPage(targetId || 'home');
+                    }
+                });
+            });
+            
+            showPage(window.location.hash ? window.location.hash.substring(1) : 'home');
+
+            // --- Mobile Menu Toggle ---
+            document.getElementById('mobile-menu-button').addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // --- Theme Toggle ---
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = themeToggle.querySelector('i');
+            
+            // Check for saved theme preference or default to dark
+            const currentTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            updateThemeIcon(currentTheme);
+            
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcon(newTheme);
+            });
+            
+            function updateThemeIcon(theme) {
+                if (theme === 'light') {
+                    themeIcon.className = 'fas fa-sun text-xl';
+                } else {
+                    themeIcon.className = 'fas fa-moon text-xl';
+                }
+            }
+            
+
+
+            // --- RAG-based Chatbot API Integration ---
+            const CHAT_API_URL = 'http://localhost:5000/api/chat';
+            const CHAT_HISTORY_URL = 'http://localhost:5000/api/chat/history';
+            const CHAT_CLEAR_URL = 'http://localhost:5000/api/chat/clear';
+            
+            // Generate a unique session ID for this user
+            const sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            
+            async function callChatAPI(message) {
+                try {
+                    const response = await fetch(CHAT_API_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            message: message,
+                            session_id: sessionId
+                        })
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`API error: ${response.statusText}`);
+                    }
+                    
+                    const result = await response.json();
+                    return result;
+                } catch (error) {
+                    console.error("Chat API call failed:", error);
+                    return {
+                        error: true,
+                        response: "Sorry, there was an error connecting to the AI. Please try again later."
+                    };
+                }
+            }
+            
+            async function loadChatHistory() {
+                try {
+                    const response = await fetch(`${CHAT_HISTORY_URL}?session_id=${sessionId}`);
+                    if (response.ok) {
+                        const result = await response.json();
+                        return result.history || [];
+                    }
+                } catch (error) {
+                    console.error("Failed to load chat history:", error);
+                }
+                return [];
+            }
+            
+            async function clearChatHistory() {
+                try {
+                    await fetch(CHAT_CLEAR_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ session_id: sessionId })
+                    });
+                } catch (error) {
+                    console.error("Failed to clear chat history:", error);
+                }
+            }
+
+            // --- RAG-based Chatbot Logic ---
+            const chatToggle = document.getElementById('chat-toggle');
+            const chatPopup = document.getElementById('chat-popup');
+            const closeChat = document.getElementById('close-chat');
+            const chatBox = document.getElementById('chat-box');
+            const chatInput = document.getElementById('chat-input');
+            const sendChatButton = document.getElementById('send-chat');
+            
+            // Load chat history when chat is opened
+            let chatHistoryLoaded = false;
+
+            chatToggle.addEventListener('click', async () => {
+                const isHidden = chatPopup.style.display === 'none' || chatPopup.style.display === '';
+                if (isHidden) {
+                    chatPopup.style.display = 'block';
+                    setTimeout(() => chatPopup.classList.remove('scale-95', 'opacity-0'), 10);
+                    
+                    // Load chat history if not already loaded
+                    if (!chatHistoryLoaded) {
+                        const history = await loadChatHistory();
+                        if (history.length > 0) {
+                            // Clear the initial message
+                            chatBox.innerHTML = '';
+                            // Load previous messages
+                            history.forEach(msg => {
+                                appendMessage(msg.content, msg.role);
+                            });
+                        }
+                        chatHistoryLoaded = true;
+                    }
+                } else {
+                    chatPopup.classList.add('scale-95', 'opacity-0');
+                    setTimeout(() => chatPopup.style.display = 'none', 300);
+                }
+            });
+
+            closeChat.addEventListener('click', () => {
+                chatPopup.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => chatPopup.style.display = 'none', 300);
+            });
+            
+            function appendMessage(message, sender) {
+                const msgWrapper = document.createElement('div');
+                msgWrapper.className = `flex mb-4 ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
+                const msgBubble = document.createElement('div');
+                msgBubble.className = `p-3 rounded-lg max-w-xs shadow ${sender === 'user' ? 'bg-cyan-500 text-white' : 'text-slate-300'}`;
+                if(sender !== 'user') msgBubble.style.backgroundColor = '#233554';
+                msgBubble.innerHTML = `<p>${message}</p>`;
+                msgWrapper.appendChild(msgBubble);
+                chatBox.appendChild(msgWrapper);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+
+            async function handleChat() {
+                const userInput = chatInput.value.trim();
+                if (!userInput) return;
+
+                appendMessage(userInput, 'user');
+                chatInput.value = '';
+                sendChatButton.disabled = true;
+                sendChatButton.innerHTML = `<div class="loader"></div>`;
+
+                // Call the RAG-based API
+                const result = await callChatAPI(userInput);
+                
+                if (result.error) {
+                    appendMessage(result.response, 'bot');
+                } else {
+                    appendMessage(result.response, 'bot');
+                    
+                    // Show cache indicator if response was cached
+                    if (result.cached) {
+                        const cacheIndicator = document.createElement('div');
+                        cacheIndicator.className = 'text-xs text-slate-500 text-center mt-1';
+                        cacheIndicator.textContent = '⚡ Cached response';
+                        chatBox.appendChild(cacheIndicator);
+                    }
+                }
+                
+                sendChatButton.disabled = false;
+                sendChatButton.textContent = 'Send';
+            }
+            
+            sendChatButton.addEventListener('click', handleChat);
+            chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleChat(); });
+            
+
+            
+            // --- Background Animation ---
+            const canvas = document.getElementById('bg-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            let particles = [];
+            const particleCount = 50;
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 1.5 + 1;
+                    this.speedX = Math.random() * 1 - 0.5;
+                    this.speedY = Math.random() * 1 - 0.5;
+                    this.color = 'rgba(100, 255, 218, 0.5)';
+                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+                }
+                draw() {
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function initParticles() {
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+            }
+
+            function handleParticles() {
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].draw();
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                handleParticles();
+                requestAnimationFrame(animate);
+            }
+
+            initParticles();
+            animate();
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                particles = [];
+                initParticles();
+            });
+        });
+    </script>
+</body>
+</html>
