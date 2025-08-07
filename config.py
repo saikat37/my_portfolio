@@ -6,7 +6,7 @@ load_dotenv()
 
 class Config:
     # Gemini API Configuration
-    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "AIzaSyC7IFzwAaG5WGcSjIJhKbeaQ")
+    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
     
     # Flask Configuration
     FLASK_ENV = os.getenv("FLASK_ENV", "development")

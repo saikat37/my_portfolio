@@ -737,10 +737,10 @@
 
 
             // --- RAG-based Chatbot API Integration ---
-            const CHAT_API_URL = 'http://localhost:5000/api/chat';
-            const CHAT_HISTORY_URL = 'http://localhost:5000/api/chat/history';
-            const CHAT_CLEAR_URL = 'http://localhost:5000/api/chat/clear';
-            
+            const CHAT_API_URL = '/api/chat';
+            const CHAT_HISTORY_URL = '/api/chat/history';
+            const CHAT_CLEAR_URL = '/api/chat/clear';
+                        
             // Generate a unique session ID for this user
             const sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
             
